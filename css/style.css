@@ -1,0 +1,729 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Regras INICIAIS (de uso geral, sem importar muito o tamanho de tela) */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html{
+    font-size: 14px;overflow-x: hidden;scroll-behavior: smooth;
+    width: 100vw;
+    
+}
+
+
+
+img{
+    max-width: 100%;;
+   
+}
+
+body{
+    background-color: #ffff;
+    font-family: "Montserrat", serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100vw !important;
+}
+
+main{
+    flex:1;
+}
+
+/* Regas Pros titulos, txt, links */
+
+
+
+h2{
+    font-size: 1.2rem;
+    color: #21212a;
+    font-weight: 500;
+}
+
+h3{
+    color: #21212a;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+p{
+    color: #1f2020;
+    font-weight: 400;
+    text-align: justify;
+}
+
+a{
+    text-decoration: none;
+    color: #232629;
+}
+
+/* Fim Regras Títulos x TXT */
+
+/* Regra para qualquer elemento com a classe limitador */
+.limitador{
+    max-width: 1100px;
+    margin: auto;
+    width: 95%;
+}
+
+/* Regras Menu */
+
+/* header{
+    position: sticky; 
+    top: 0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 2000;
+    
+}
+
+header .limitador{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 13vh;
+}
+
+
+header nav{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+header nav a{
+    font-size: 18px;
+    font-weight: 300;
+    display: block;
+    
+
+}
+
+header nav a:hover{
+    border-bottom: 1px solid #27cc27;
+    color: #27cc27;
+   
+
+}
+
+.cart {
+    position: relative; 
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px; 
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 14px;
+}
+
+
+ .search-form{
+    position: absolute;
+    top: 100%; right: 7%;
+    background: #fff;
+    width: 50rem;
+    height: 3rem;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+ .search-form input{
+    height: 100%;
+    width: 92%;
+    font-size: 1.2rem;
+    padding: 1rem;
+    text-transform: none;
+    border: none;
+}
+
+.search-form label{
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+}
+
+
+.cart-items-container{
+    position: absolute;
+    top: 100%;right: 0;
+    height: calc(100vh - 1rem);
+    width: 18rem;
+    background: #fff;
+    padding: 0 1.5rem;
+}
+
+.cart-items-container .cart-item{
+    position: relative;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cart-items-container .cart-item .fa-times{
+    position: absolute;
+    top: 1rem; right: 1rem;
+    cursor: pointer;
+}
+
+.cart-items-container .cart-item img{
+    height: 7rem;
+}
+
+
+
+ */
+
+
+
+ .header{
+    width: 100%;
+    background: #21212a;
+    height: 13vh;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+}
+
+.header .container-nav{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+h1{
+    color: #fff;
+}
+
+h1 a{
+    display: block;
+    color: #fff;
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.links-menu{
+    width: 100%;
+    display: flex;
+    gap: 15px;
+}
+
+.links-menu li{
+    list-style: none;
+}
+
+.links-menu li a{
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 5px 20px;
+    font-size: 13px;
+}
+.icons{
+    display: flex;
+    gap: 10px;
+    
+}
+
+
+#btnMenu{
+    display: none;
+}
+
+.icons a{
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.container-cart{
+    position: absolute;
+    left: -350px;
+    transition: 1s;
+    width: 235px;
+    height: 100vh;
+    border-right: 1px solid #eee;
+    transition: 1s;
+    background: #fff;
+}
+
+
+.container-cart.show{
+    position: absolute;
+    left: 0px;
+    
+    width: 235px;
+    height: 100vh;
+    border-right: 1px solid #eee;
+    transition: 1s;
+    background: #fff;
+}
+
+.container-cart .card-carrinho{
+    border: 1px solid #21212a13;
+    padding: 10px;
+    display: flex;
+}
+
+.cabe img{
+    width: 80px;
+}
+
+.body-carrinho{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    
+}
+
+.body-carrinho h3{
+    font-size: 14px;
+}
+
+
+.finalizar-pedido{
+    padding: 10px;
+    border: none;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 865px) {
+
+    .header .container-nav{
+        width: 90%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #btnMenu{
+        display: block;
+    }
+    .links-menu{
+        position: absolute;
+        right: -300px;
+        top: 13vh;
+        transition: 1s;
+        width: 235px;
+        height: 100vh;
+        border-right: 1px solid #eee;
+        transition: 1s;
+        background: #21212a;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    
+
+    .links-menu.show{
+        right: 0;
+        transition: 1s;
+        display: flex;
+    }
+
+    .links-menu li a{
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 5px 20px;
+        text-align: center;
+    }
+
+    .txt-apre{
+       
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .txt-apre .content-container {
+        display: flex; /* Alinha aside e figure lado a lado */
+        flex-direction: column;
+        gap: 20px; /* Espaçamento entre os elementos */
+    }
+
+    .txt-apre .content-container .flex-apre p {
+        width: 90%; /* Largura fixa para os parágrafos */
+        margin: 0; /* Remove margens padrão */
+        padding-top: 30px;
+    }
+}
+
+
+
+/* Fim Regras Menu */
+
+/* Regas Destaque */
+
+
+.destaque{
+    width: 100%;
+
+    padding: 0;
+}
+
+.bg{
+    background-image: url(../imagens/destaque.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: scroll;
+    height: 100vh;
+
+}
+
+
+/* Fim Regras Destaque */
+
+
+/* Regra css de Apresentação */
+
+
+.apre {
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Permite que a altura seja automática */
+    padding: 50px 0px;
+}
+
+.txt-apre h2 {
+    width: 100%; /* Faz o h2 ocupar toda a largura */
+}
+
+.content-container {
+    display: flex; /* Alinha aside e figure lado a lado */
+    gap: 20px; /* Espaçamento entre os elementos */
+}
+
+.flex-apre {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Mantém os parágrafos em coluna */
+}
+
+.flex-apre p {
+    width: 500px; /* Largura fixa para os parágrafos */
+    margin: 0; /* Remove margens padrão */
+    padding-top: 30px;
+}
+
+figure {
+    margin: 0; /* Remove margens da figura */
+    display: flex; /* Para centralizar a imagem, se necessário */
+    align-items: center; /* Alinha a imagem verticalmente */
+    justify-content: center; /* Alinha a imagem horizontalmente */
+    width: 100%;
+}
+
+figure img {
+    max-width: 70%; /* Faz a imagem responsiva */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+.btn--apre{
+    padding: 10px;
+    display: block;
+    border:1px solid #27cc27;
+    text-align: center;
+    width: 30%;
+    border-radius: 5px;
+    
+}
+
+.btn--apre:hover{
+    border-top: #21212a 1px solid;
+    transition:  0.5s ease-out;
+    transform: 0.3s ease-out;
+}
+
+/* Fim Regras apresentação */
+
+
+/* Regras vitrine */
+
+.pratileira {
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Permite que a altura seja automática */
+    padding: 50px 0px;
+}
+
+.produtos-destaque{
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    gap: 10px;
+}
+
+
+.produto--{
+    
+    height: 360px;
+    justify-content: space-around;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    border: 1px solid #6c757d28;
+    margin-left: 10px;
+}
+
+.produto-- img{
+    width: 30%;
+}
+
+
+.descricao{
+    text-align: center;
+    font-size: 16px;
+}
+
+
+.botao-comprar{
+    border: 1px solid #27cc27;
+    padding: 10px 70px;
+    border-radius: 5px;
+    transition:  0.5s ease-out;
+    transform: 0.3s ease-out;
+}
+
+.botao-comprar:hover{
+    background: #21212a;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+
+
+@media screen and (max-width: 865px) {
+
+
+    .botao-comprar{
+        border: 1px solid #27cc27;
+        padding: 10px ;
+        border-radius: 5px;
+        transition:  0.5s ease-out;
+        transform: 0.3s ease-out;
+        width: 100%;
+        text-align: center;
+    }
+    .produto-- img{
+        width: 70%;
+    }
+
+    .descricao{
+        text-align: left;
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .produto--{
+    
+        height: 360px;
+        justify-content: space-around;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid #6c757d28;
+        margin-left: 10px;
+    }
+    
+   
+    
+}
+
+
+/* fim Regras Vitirne. */
+
+
+/* CSS regras benefincios */
+
+#beneficios{
+
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Permite que a altura seja automática */
+    padding: 50px 0px;
+
+}
+
+.benefits-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas para os cards */
+    gap: 20px; /* Espaçamento entre os cards */
+    margin-top: 10px; /* Espaçamento acima dos benefícios */
+}
+
+.benefit-card {
+    background-color: #f9f9f9;
+    border: 1px solid #dddddd81;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card img {
+    margin-bottom: 10px;
+    width: 30%;
+}
+.benefit-card i {
+    color: #27cc27;
+    margin-bottom: 10px;
+    width: 30%;
+}
+
+.benefit-card p{
+    font-size: 15px;
+    text-align: center;
+}
+
+.benefit-card h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+
+.benefit-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+.left-card {
+    grid-column: span 1; /* Ocupa a largura de duas colunas */
+}
+
+
+/* fim css regras beneficios */
+
+
+/* regras css blog  */
+
+
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Cards responsivos */
+    gap: 20px; /* Espaçamento entre os posts */
+    margin-top: 20px; /* Espaçamento acima da seção */
+    margin-bottom: 20px;
+}
+
+.blog-post {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post p{
+    text-align: center;
+    font-size: 15px;
+}
+
+.blog-post img {
+    max-width: 100%; /* Faz a imagem ocupar o espaço disponível */
+    height: auto; /* Mantém a proporção */
+    margin-bottom: 15px;
+}
+
+.blog-post h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+
+
+.blog-post .read-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.blog-post .read-more:hover {
+    background-color: #45a049; /* Cor ao passar o mouse */
+}
+
+
+
+/* regras css blogs fim */
+
+
+/* Regras Footer */
+
+footer{
+    background: #fff;
+    height: auto;  
+    border-top: 1px solid #21212a;
+    padding: 10px
+}
+
+footer .container--{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    
+}
+
+.redes-sociais{
+    display: flex;
+    gap: 30px;
+}
+
+
+
+/* Fim Regras Footer */
+
+/* Regra Condicional */
+
+@media screen and (min-width: 758px){
+    /* Regras CSS */
+    html{
+        font-size: 20px;
+    }
+    h1{
+        text-align: center;
+    }
+
+    h2{
+        text-align: center;
+    }
+
+    
+
+}
+
+@media screen and (min-width: 810px){
+    html{
+        font-size: 22px;
+    }
+   
+
+   
+}
