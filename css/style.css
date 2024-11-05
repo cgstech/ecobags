@@ -367,8 +367,15 @@ h1 a{
     height: 80vh
    }
    .bg article {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #21212a;
    }
+   .bg article h2{ text-align: center;}
+   .bg article p{ color: #ddd}
 }
 
 
