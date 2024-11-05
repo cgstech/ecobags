@@ -359,6 +359,14 @@ h1 a{
         margin: 0; /* Remove margens padrão */
         padding-top: 30px;
     }
+    .bg{
+    background-image: url(../imagens/destaque.jpg);
+    background-position: center;
+    background-size: contain;
+    background-attachment: scroll;
+    height: 100vh;
+
+   }
 }
 
 
