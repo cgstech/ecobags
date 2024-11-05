@@ -364,10 +364,10 @@ h1 a{
     background-position: center;
     background-size: contain;
     background-attachment: scroll;
-    height: 100vh;
-    display: flex;
-    flex-direction: column:
-    align-items: center 
+    height: 80vh
+   }
+   .bg article {
+    background: #21212a;
    }
 }
 
