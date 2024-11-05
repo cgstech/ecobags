@@ -365,7 +365,9 @@ h1 a{
     background-size: contain;
     background-attachment: scroll;
     height: 100vh;
-
+    display: flex;
+    flex-direction: column:
+    align-items: center 
    }
 }
 
