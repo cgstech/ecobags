@@ -8,6 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             margin: 40px;
+            background: #f4f4f4;
+            text-align: center;
         }
         .container {
             max-width: 400px;
@@ -15,12 +17,33 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            background: #f9f9f9;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         input, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            border: 2px solid red !important;
+        }
+        .result {
+            text-align: left;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -28,27 +51,32 @@
     <div class="container">
         <h2>Calculadora de Sub-redes</h2>
         <label for="ip">Endereço IP:</label>
-        <input type="text" id="ip" placeholder="Ex: 192.168.1.1" required>
+        <input type="text" id="ip" placeholder="Exemplo: 192.168.1.1" required>
         
         <label for="hosts">Número de Hosts Desejados:</label>
-        <input type="number" id="hosts" min="2" placeholder="Ex: 5000" required>
+        <input type="number" id="hosts" min="2" placeholder="Exemplo: 5000" required>
 
         <button onclick="calcularSubrede()">Calcular</button>
 
         <h3>Resultados:</h3>
-        <p><strong>Endereço da Rede:</strong> <span id="enderecoRede"></span></p>
-        <p><strong>Endereço de Broadcast:</strong> <span id="enderecoBroadcast"></span></p>
-        <p><strong>Máscara de Sub-rede:</strong> <span id="mascaraSubrede"></span></p>
-        <p><strong>Quantidade de IPs utilizáveis:</strong> <span id="quantidadeIps"></span></p>
+        <div class="result">
+            <p><strong>Endereço da Rede:</strong> <span id="enderecoRede"></span></p>
+            <p><strong>Endereço de Broadcast:</strong> <span id="enderecoBroadcast"></span></p>
+            <p><strong>Máscara de Sub-rede:</strong> <span id="mascaraSubrede"></span></p>
+            <p><strong>Quantidade de IPs utilizáveis:</strong> <span id="quantidadeIps"></span></p>
+            <p><strong>Primeiro IP utilizável:</strong> <span id="primeiroIP"></span></p>
+            <p><strong>Último IP utilizável:</strong> <span id="ultimoIP"></span></p>
+        </div>
     </div>
 
     <script>
         function calcularSubrede() {
             let ip = document.getElementById("ip").value;
             let hosts = parseInt(document.getElementById("hosts").value);
-
+            
             if (!validarIP(ip) || hosts < 2) {
                 alert("Por favor, insira um IP válido e um número de hosts maior ou igual a 2.");
+                destacarErro(ip, hosts);
                 return;
             }
 
@@ -67,17 +95,22 @@
 
             let enderecoRede = binarioParaIP(redeBinaria);
             let enderecoBroadcast = binarioParaIP(broadcastBinaria);
+            let primeiroIP = binarioParaIP(redeBinaria.slice(0, 31) + "1");
+            let ultimoIP = binarioParaIP(broadcastBinaria.slice(0, 31) + "0");
 
             document.getElementById("enderecoRede").innerText = enderecoRede;
             document.getElementById("enderecoBroadcast").innerText = enderecoBroadcast;
             document.getElementById("mascaraSubrede").innerText = mascaraSubrede.join(".") + " (/" + cidr + ")";
             document.getElementById("quantidadeIps").innerText = Math.pow(2, (32 - cidr)) - 2;
+            document.getElementById("primeiroIP").innerText = primeiroIP;
+            document.getElementById("ultimoIP").innerText = ultimoIP;
         }
 
         function validarIP(ip) {
             let regex = /^(\d{1,3}\.){3}\d{1,3}$/;
             if (!regex.test(ip)) return false;
-            return ip.split(".").every(octeto => parseInt(octeto) >= 0 && parseInt(octeto) <= 255);
+            let octetos = ip.split(".").map(Number);
+            return octetos.length === 4 && octetos.every(octeto => octeto >= 0 && octeto <= 255);
         }
 
         function ipParaBinario(ip) {
@@ -90,6 +123,20 @@
                 ip.push(parseInt(binario.slice(i * 8, (i + 1) * 8), 2));
             }
             return ip.join(".");
+        }
+
+        function destacarErro(ip, hosts) {
+            let ipInput = document.getElementById("ip");
+            let hostsInput = document.getElementById("hosts");
+
+            if (!validarIP(ip)) {
+                ipInput.classList.add("error");
+                setTimeout(() => ipInput.classList.remove("error"), 2000);
+            }
+            if (hosts < 2) {
+                hostsInput.classList.add("error");
+                setTimeout(() => hostsInput.classList.remove("error"), 2000);
+            }
         }
     </script>
 </body>
