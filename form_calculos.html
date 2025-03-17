@@ -54,8 +54,8 @@
         <label for="ip">Endereço IP:</label>
         <input type="text" id="ip" placeholder="Exemplo: 192.168.1.1" required>
         
-        <label for="departamentos">Número de Departamentos:</label>
-        <input type="number" id="departamentos" min="1" placeholder="Exemplo: 8" required>
+        <label for="mascara">Máscara de Sub-rede (CIDR ou Decimal):</label>
+        <input type="text" id="mascara" placeholder="Exemplo: 255.255.255.0 ou /24" required>
 
         <button onclick="calcularSubrede()">Calcular</button>
 
@@ -74,17 +74,15 @@
     <script>
         function calcularSubrede() {
             let ip = document.getElementById("ip").value;
-            let departamentos = parseInt(document.getElementById("departamentos").value);
+            let mascaraInput = document.getElementById("mascara").value.trim();
 
-            if (!validarIP(ip) || departamentos < 1) {
-                alert("Por favor, insira um IP válido e um número de departamentos maior ou igual a 1.");
-                destacarErro(ip, departamentos);
+            if (!validarIP(ip) || !validarMascara(mascaraInput)) {
+                alert("Por favor, insira um IP e uma máscara de sub-rede válidos.");
+                destacarErro(ip, mascaraInput);
                 return;
             }
 
-            let hostsNecessarios = departamentos + 2; // Inclui rede e broadcast
-            let cidr = 32 - Math.ceil(Math.log2(hostsNecessarios));
-
+            let cidr = mascaraInput.startsWith("/") ? parseInt(mascaraInput.slice(1)) : calcularCIDR(mascaraInput);
             let totalHosts = Math.pow(2, (32 - cidr));
             let hostsUtilizaveis = totalHosts - 2;
 
@@ -119,6 +117,22 @@
             return octetos.length === 4 && octetos.every(octeto => octeto >= 0 && octeto <= 255);
         }
 
+        function validarMascara(mascara) {
+            if (mascara.startsWith("/")) {
+                let cidr = parseInt(mascara.slice(1));
+                return cidr >= 1 && cidr <= 30;
+            } 
+            return calcularCIDR(mascara) !== -1;
+        }
+
+        function calcularCIDR(mascara) {
+            let partes = mascara.split(".").map(Number);
+            if (partes.length !== 4 || partes.some(p => p < 0 || p > 255)) return -1;
+            let binario = partes.map(p => ("00000000" + p.toString(2)).slice(-8)).join("");
+            if (!/^(1+0*)$/.test(binario)) return -1;
+            return binario.indexOf("0");
+        }
+
         function ipParaBinario(ip) {
             return ip.split(".").map(octeto => ("00000000" + parseInt(octeto).toString(2)).slice(-8)).join("");
         }
@@ -131,17 +145,17 @@
             return ip.join(".");
         }
 
-        function destacarErro(ip, departamentos) {
+        function destacarErro(ip, mascara) {
             let ipInput = document.getElementById("ip");
-            let departamentosInput = document.getElementById("departamentos");
+            let mascaraInput = document.getElementById("mascara");
 
             if (!validarIP(ip)) {
                 ipInput.classList.add("error");
                 setTimeout(() => ipInput.classList.remove("error"), 2000);
             }
-            if (departamentos < 1) {
-                departamentosInput.classList.add("error");
-                setTimeout(() => departamentosInput.classList.remove("error"), 2000);
+            if (!validarMascara(mascara)) {
+                mascaraInput.classList.add("error");
+                setTimeout(() => mascaraInput.classList.remove("error"), 2000);
             }
         }
     </script>
