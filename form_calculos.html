@@ -21,7 +21,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         input, button {
-            width: 80%;
+            width: 100%;
             padding: 10px;
             margin: 10px 0;
             border-radius: 5px;
@@ -63,7 +63,8 @@
             <p><strong>Endereço da Rede:</strong> <span id="enderecoRede"></span></p>
             <p><strong>Endereço de Broadcast:</strong> <span id="enderecoBroadcast"></span></p>
             <p><strong>Máscara de Sub-rede:</strong> <span id="mascaraSubrede"></span></p>
-            <p><strong>Quantidade de IPs utilizáveis:</strong> <span id="quantidadeIps"></span></p>
+            <p><strong>Total de Hosts por Rede:</strong> <span id="totalHosts"></span></p>
+            <p><strong>Hosts Utilizáveis:</strong> <span id="quantidadeIps"></span></p>
             <p><strong>Primeiro IP utilizável:</strong> <span id="primeiroIP"></span></p>
             <p><strong>Último IP utilizável:</strong> <span id="ultimoIP"></span></p>
         </div>
@@ -83,6 +84,9 @@
             let ips_necessarios = hosts + 2;
             let cidr = 32 - Math.ceil(Math.log2(ips_necessarios));
 
+            let totalHosts = Math.pow(2, (32 - cidr));
+            let hostsUtilizaveis = totalHosts - 2;
+
             let mascaraBinaria = "1".repeat(cidr) + "0".repeat(32 - cidr);
             let mascaraSubrede = [];
             for (let i = 0; i < 4; i++) {
@@ -101,7 +105,8 @@
             document.getElementById("enderecoRede").innerText = enderecoRede;
             document.getElementById("enderecoBroadcast").innerText = enderecoBroadcast;
             document.getElementById("mascaraSubrede").innerText = mascaraSubrede.join(".") + " (/" + cidr + ")";
-            document.getElementById("quantidadeIps").innerText = Math.pow(2, (32 - cidr)) - 2;
+            document.getElementById("totalHosts").innerText = totalHosts;
+            document.getElementById("quantidadeIps").innerText = hostsUtilizaveis;
             document.getElementById("primeiroIP").innerText = primeiroIP;
             document.getElementById("ultimoIP").innerText = ultimoIP;
         }
