@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Sub-redes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Sub-redes</h2>
+        <form action="calcular.php" method="POST">
+            <label for="ip">Endereço IP:</label>
+            <input type="text" id="ip" name="ip" placeholder="Ex: 192.168.1.1" required>
+            
+            <label for="hosts">Número de Hosts Desejados:</label>
+            <input type="number" id="hosts" name="hosts" min="2" placeholder="Ex: 50" required>
+
+            <button type="submit">Calcular</button>
+        </form>
+    </div>
+</body>
+</html>
