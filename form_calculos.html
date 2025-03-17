@@ -50,11 +50,12 @@
 <body>
     <div class="container">
         <h2>Calculadora de Sub-redes</h2>
+        
         <label for="ip">Endereço IP:</label>
         <input type="text" id="ip" placeholder="Exemplo: 192.168.1.1" required>
         
-        <label for="hosts">Número de Hosts Desejados:</label>
-        <input type="number" id="hosts" min="2" placeholder="Exemplo: 5000" required>
+        <label for="departamentos">Número de Departamentos:</label>
+        <input type="number" id="departamentos" min="1" placeholder="Exemplo: 8" required>
 
         <button onclick="calcularSubrede()">Calcular</button>
 
@@ -73,16 +74,16 @@
     <script>
         function calcularSubrede() {
             let ip = document.getElementById("ip").value;
-            let hosts = parseInt(document.getElementById("hosts").value);
-            
-            if (!validarIP(ip) || hosts < 2) {
-                alert("Por favor, insira um IP válido e um número de hosts maior ou igual a 2.");
-                destacarErro(ip, hosts);
+            let departamentos = parseInt(document.getElementById("departamentos").value);
+
+            if (!validarIP(ip) || departamentos < 1) {
+                alert("Por favor, insira um IP válido e um número de departamentos maior ou igual a 1.");
+                destacarErro(ip, departamentos);
                 return;
             }
 
-            let ips_necessarios = hosts + 2;
-            let cidr = 32 - Math.ceil(Math.log2(ips_necessarios));
+            let hostsNecessarios = departamentos + 2; // Inclui rede e broadcast
+            let cidr = 32 - Math.ceil(Math.log2(hostsNecessarios));
 
             let totalHosts = Math.pow(2, (32 - cidr));
             let hostsUtilizaveis = totalHosts - 2;
@@ -130,17 +131,17 @@
             return ip.join(".");
         }
 
-        function destacarErro(ip, hosts) {
+        function destacarErro(ip, departamentos) {
             let ipInput = document.getElementById("ip");
-            let hostsInput = document.getElementById("hosts");
+            let departamentosInput = document.getElementById("departamentos");
 
             if (!validarIP(ip)) {
                 ipInput.classList.add("error");
                 setTimeout(() => ipInput.classList.remove("error"), 2000);
             }
-            if (hosts < 2) {
-                hostsInput.classList.add("error");
-                setTimeout(() => hostsInput.classList.remove("error"), 2000);
+            if (departamentos < 1) {
+                departamentosInput.classList.add("error");
+                setTimeout(() => departamentosInput.classList.remove("error"), 2000);
             }
         }
     </script>
